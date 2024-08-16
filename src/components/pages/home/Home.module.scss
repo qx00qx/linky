@@ -1,0 +1,58 @@
+.hero {
+    position: relative;
+    margin-top: 5rem;
+    .title {
+        text-align: center;
+        margin-top: 2rem;
+        font-weight: 800;
+        font-size: 7.5rem;
+
+        &_tablet {
+            margin-top: 6rem;
+            font-size: 4.5rem;
+        }
+
+        &_mobile {
+            font-size: 4rem;
+        }
+    }
+    &_img1 {
+        width: 22vw;
+        position: absolute;
+        top: 7rem;
+        margin-left: -120px;
+        left: 0;
+
+        &_tablet {
+            width: 32vw;
+            top: 9rem;
+            margin-left: -110px;
+        }
+
+        &_mobile {
+            width: 55vw;
+            top: 14rem;
+            margin-left: -90px;
+        }
+    }
+    &_img2 {
+        width: 25vw;
+        position: absolute;
+        top: -3rem;
+        right: 0px;
+        margin-right: -170px;
+
+        &_tablet {
+            width: 40vw;
+            top: -7rem;
+            margin-right: -120px;
+        }
+
+        &_mobile {
+            width: 65vw;
+            top: -7rem;
+            margin-right: -130px;
+            z-index: 1;
+        }
+    }
+}

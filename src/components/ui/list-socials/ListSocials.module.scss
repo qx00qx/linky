@@ -1,0 +1,18 @@
+.socials {
+    margin-top: 1.3rem;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+        svg {
+            transition: all 0.3s ease-in-out;  
+        }  
+        &:hover {
+            svg {
+                fill: #A0AEC0;
+            }
+        }
+    }
+}

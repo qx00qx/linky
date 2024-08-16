@@ -1,0 +1,17 @@
+.logo {
+    display: flex;
+    align-items: center;
+    .asterisk {
+        path {
+            stroke-width: 0.5px;
+        }
+    }
+    .name {
+        font-weight: 600;
+        font-size: 32px;
+        &.none {
+            display: none;
+        }
+    }
+
+}
