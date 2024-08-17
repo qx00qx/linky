@@ -9,11 +9,15 @@ const useScreenSizes = () => {
     query: "(max-width: 800px)"
   });
 
+  const isLaptop = useMediaQuery({
+    query: "(max-width: 1024px)"
+  });
+
   const isMobile = useMediaQuery({
     query: "(max-width: 450px)"
   });
 
-  return { isDesktop, isTablet, isMobile };
+  return { isDesktop, isTablet, isMobile, isLaptop };
 };
 
 export default useScreenSizes;

@@ -1,6 +1,7 @@
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import styles from './Form.module.scss'
 import React, { useState } from 'react';
+import InputField from '@components/ui/input-field/InputField';
 
 interface FormProps {
   title: string;
@@ -13,14 +14,18 @@ const Form: React.FC<FormProps> = ({ title, handleClick }) => {
 
   return (
     <form className={styles.form}>
-      <FormControl className={styles.email}>
-        <FormLabel>Email</FormLabel>
-        <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-      </FormControl>
-      <FormControl className={styles.password}>
-        <FormLabel>Password</FormLabel>
-        <Input type='password' value={pass} onChange={(e) => setPass(e.target.value)} />
-      </FormControl>
+      <InputField
+         type='email'
+         label='Email' 
+         value={email} 
+         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+        />
+        <InputField
+         type='password'
+         label='Password' 
+         value={pass} 
+         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPass(e.target.value)}
+        />
       <Button onClick={() => handleClick(email, pass)}>{title}</Button>
     </form>
   );

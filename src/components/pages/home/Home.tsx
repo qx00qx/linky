@@ -6,7 +6,7 @@ import useScreenSizes from '../../../hooks/useScreenSizes';
 import clsx from 'clsx';
 
 const Home: React.FC = () => {
-    const { isTablet, isMobile } = useScreenSizes();
+    const { isTablet, isMobile, isLaptop } = useScreenSizes();
 
     const imgVariants = {
         'initial': { y: 0, x: 0 },
@@ -35,7 +35,10 @@ const Home: React.FC = () => {
     }
     
     return (
-        <section className={styles.hero}>
+        <section className={clsx({
+            [styles.hero]: true,
+            [styles.hero_laptop]: isLaptop,
+        })}>
             <h1 className={clsx({
                 [styles.title]: true,
                 [styles.title_mobile]: isMobile,
@@ -46,7 +49,8 @@ const Home: React.FC = () => {
                 className={clsx({
                     [styles.hero_img1]: true,
                     [styles.hero_img1_mobile]: isMobile,
-                    [styles.hero_img1_tablet]: isTablet
+                    [styles.hero_img1_tablet]: isTablet,
+                    [styles.hero_img1_laptop]: isLaptop
                 })}
                 initial={'initial'}
                 animate={'animate'}
@@ -56,7 +60,8 @@ const Home: React.FC = () => {
                 className={clsx({
                     [styles.hero_img2]: true,
                     [styles.hero_img2_mobile]: isMobile,
-                    [styles.hero_img2_tablet]: isTablet
+                    [styles.hero_img2_tablet]: isTablet,
+                    [styles.hero_img2_laptop]: isLaptop
                     })}
                 initial={'initial'}
                 animate={'animate'}

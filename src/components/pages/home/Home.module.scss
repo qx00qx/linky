@@ -1,6 +1,9 @@
 .hero {
     position: relative;
     margin-top: 5rem;
+    &_laptop {
+        margin-top: 3rem;
+    }
     .title {
         text-align: center;
         margin-top: 2rem;
@@ -23,6 +26,12 @@
         margin-left: -120px;
         left: 0;
 
+        &_laptop {
+            width: 30vw;
+            top: 4rem;
+            margin-left: -110px;
+        }
+
         &_tablet {
             width: 32vw;
             top: 9rem;
@@ -41,6 +50,12 @@
         top: -3rem;
         right: 0px;
         margin-right: -170px;
+
+        &_laptop {
+            width: 32vw;
+            top: -3rem;
+            margin-right: -110px;
+        }
 
         &_tablet {
             width: 40vw;

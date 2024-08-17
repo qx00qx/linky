@@ -13,7 +13,7 @@ const ThemeSwitcher: React.FC = () => {
         fontSize="lg"
         color="currentcolor"
         marginLeft="10px"
-        icon={<SwicthIcon />}
+        icon={<SwicthIcon size={25} />}
         aria-label={`Switch to ${text} mode`}
         onClick={toggleColorMode}
         variant="ghost"
