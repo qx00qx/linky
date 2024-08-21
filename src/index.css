@@ -32,18 +32,20 @@
 body.chakra-ui-dark ::selection {
     background: #A0AEC0
 }
-
+/* 
 body.chakra-ui-dark .chakra-button.css-diyi4 {
     color: #1A202C;
 }
+
+body.chakra-ui-dark .chakra-button.css-q6wngd {
+    color: #1A202C;
+} */
 
 /* Links */
 
 a, a:link, a:visited  {
     text-decoration: none;
-    color: inherit;
 }
-
 a:hover  {
     text-decoration: none;
 }

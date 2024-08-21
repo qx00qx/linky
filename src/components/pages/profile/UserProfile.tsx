@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './Profile.module.scss';
 import { Avatar, Spinner } from '@chakra-ui/react';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import LinkBlock from '../../link-block/LinkBlock';
-import { useAppDispatch } from '@hooks/redux-hooks/useAppDispatch';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from 'firebase/auth';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@redux/store';
 
 const UserProfile: React.FC = () => {
-    const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
 
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const auth = getAuth()
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setIsLoading(false);
-        } else {
-          setError('User not found');
-          setIsLoading(false);
-        }
-    });
+    const [user, loading, error] = useAuthState(auth)
+    
 
-    if (isLoading) {
+    if (loading) {
         return <div className={styles.profile}>
                     <Spinner
                         thickness='4px'
@@ -34,7 +27,7 @@ const UserProfile: React.FC = () => {
     }
 
     if (error) {
-        return <div>Error:{error}</div>
+        return <div>Error:{String(error)}</div>
     }
 
     return (

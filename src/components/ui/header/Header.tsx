@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.scss';
+import { getAuth, signOut } from 'firebase/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import { RiAccountCircleFill } from "react-icons/ri";
@@ -14,15 +15,17 @@ const Header: React.FC = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-
+    
+    const auth = getAuth()
     const { isAuth } = useAuth()
 
     const handleLogout = () => {
         if (location.pathname === '/profile') {
             navigate('/')
         }
+        signOut(auth)
         dispatch(logoutUser())
-        localStorage.removeItem('user')
+        localStorage.removeItem('userData')
     }
 
     return (
@@ -34,22 +37,30 @@ const Header: React.FC = () => {
             </Link>
             <div className={styles.left_side}>
                 { isAuth ? (<div>
-                    <ButtonGroup>
+                    <ButtonGroup spacing={'5px'}>
+                        <Button as={Link} to='/profile' bg={'white'}>
+                            <RiAccountCircleFill size={30} />
+                        </Button>
+                        <Button as={Link} 
+                                to='/profile/settings'
+                                bg={'white'}
+                                px={'26px'}
+                                py={'16px'}
+                                variant={'outline'}>
+                            Settings
+                        </Button>
                         <Button bg={'white'}
                                 px={'26px'}
                                 py={'16px'}
                                 variant={'outline'} 
                                 onClick={() => handleLogout()}> 
-                            Logout
-                        </Button>
-                        <Button as={Link} to='/profile' bg={'white'}>
-                            <RiAccountCircleFill size={30} />
+                                Logout
                         </Button>
                     </ButtonGroup>
                 </div>) : (
                 <div className={styles.auth}>
-                    <Button as={Link} to="/login" bg={'white'} px={'26px'} py={'16px'} variant={'outline'}>Login</Button>
-                    <Button as={Link} to="/signup" bg={'white'} px={'26px'} py={'16px'} variant={'outline'}>Sign Up</Button>
+                    <Button color={'gray.800'} as={Link} to="/login" bg={'white'} px={'26px'} py={'16px'} variant={'outline'}>Login</Button>
+                    <Button color={'gray.800'} as={Link} to="/signup" bg={'white'} px={'26px'} py={'16px'} variant={'outline'}>Sign Up</Button>
                 </div>)}
                 <ThemeSwitcher/>
             </div>

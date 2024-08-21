@@ -6,6 +6,7 @@ import UserProfile from '@components/pages/profile/UserProfile';
 import Home from '@components/pages/home/Home';
 import Layout from '@layouts/Layout';
 import { PrivateRoutes } from '@utils/privateRoutes';
+import AccountSettings from '@components/pages/account-settings/AccountSettings';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
          {
             path: "/profile",
             element: <UserProfile />,
-         }
+         },
+         {
+          path: "/profile/settings",
+          element: <AccountSettings />,
+       }
         ]
       },
       {

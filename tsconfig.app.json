@@ -20,6 +20,7 @@
       "@pages/*": ["./components/pages"],
       "@redux/*": ["./redux/*"],
       "@link-blocks/*": ["./link-blocks/*"],
+      "@firebase-app": ["./firebase"]
     },
     
     /* Bundler mode */

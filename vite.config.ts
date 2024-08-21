@@ -16,7 +16,8 @@ export default defineConfig({
       "@redux": path.resolve(__dirname, "src/redux"),
       "@router": path.resolve(__dirname, "src/router"),
       "@utils": path.resolve(__dirname, "src/utils"),
-      "@hooks": path.resolve(__dirname, "src/hooks")
+      "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@firebase-app": path.resolve(__dirname,"src/firebase")
     },
   },
 })

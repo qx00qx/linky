@@ -1,0 +1,29 @@
+.settings {
+    margin-top: 3.12rem;
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    .card {
+        padding: 20px 16px;
+        max-width: 650px;
+        background-color: var(--chakra-colors-gray-50);
+        margin-top: 1rem;
+        border-radius: 24px;
+        &_header {
+            display: flex;
+            gap: 16px;
+            button:hover {
+                border-color: var(--chakra-colors-gray-300);
+                background-color: var(--chakra-colors-gray-300);
+            }
+        }
+        &_body {
+            margin-top: 1rem;
+            .counter {
+                margin-top: 10px;
+                text-align: right;
+            }
+        }
+    }
+}

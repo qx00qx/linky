@@ -10,19 +10,21 @@ const Login: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
+    const auth = getAuth()
     
     const handleLogin = (email: string, password: string) => {
         setIsLoading(true)
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
                 const userData = {
-                    id: user.uid,
-                    email: user.email,
-                    username: user.displayName,
+                    id: user?.uid,
+                    email: user?.email,
+                    username: user?.displayName,
+                    picture: user?.photoURL
                 };
                 dispatch(setUser(userData))
-                localStorage.setItem('user', JSON.stringify(userData))
+                localStorage.setItem('userData', JSON.stringify(userData))
                 navigate('/profile')
             }
             )
