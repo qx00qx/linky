@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { useAppSelector } from './redux-hooks/useAppDispatch';
 
 const useAuth = () => {
-    const { email } = useSelector((state: RootState) => state.user)
+    const { email } = useAppSelector((state) => state.user)
 
     return {
         isAuth: email

@@ -25,7 +25,7 @@ const Login: React.FC = () => {
                 };
                 dispatch(setUser(userData))
                 localStorage.setItem('userData', JSON.stringify(userData))
-                navigate('/profile')
+                navigate('/account')
             }
             )
             .catch(() => alert('Invalid user!'))

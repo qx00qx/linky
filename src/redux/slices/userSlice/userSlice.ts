@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../../@types/user";
+import { User } from "types/user";
 import { getUserfromLS } from "@utils/LSFunction";
+import { userSocialLink } from "../../../types/socialLink";
 
   const { userData } = getUserfromLS()
     
@@ -8,7 +9,8 @@ import { getUserfromLS } from "@utils/LSFunction";
     email: null,
     id: null,
     username: null,
-    picture: null
+    picture: null,
+    socialsLinks: []
   }
 
   export const userSlice = createSlice({
@@ -18,8 +20,7 @@ import { getUserfromLS } from "@utils/LSFunction";
         setUser(state, action: PayloadAction<User>) {
           state.id = action.payload.id,
           state.email = action.payload.email,
-          state.username = action.payload.username,
-          state.picture = action.payload.picture
+          state.username = action.payload.username
         },
         setProfilePicture(state, action: PayloadAction<any>) {
           state.picture = action.payload
@@ -28,14 +29,21 @@ import { getUserfromLS } from "@utils/LSFunction";
           state.picture = null
         },
         logoutUser(state) {
-          state.id = null,
+          state.id = '',
           state.email = null
           state.username = null
           state.picture = null
+          state.socialsLinks = []
+        },
+        addSocialsLinks(state, action: PayloadAction<userSocialLink>) {
+          state.socialsLinks = [...state.socialsLinks || [],  action.payload]
+        },
+        removeAllSocialsLinks(state) {
+          state.socialsLinks = []
         }
     },
   })
   
-  export const { setUser, setProfilePicture, deleteProfilePicture, logoutUser } = userSlice.actions
+  export const { setUser, setProfilePicture, deleteProfilePicture, logoutUser, addSocialsLinks, removeAllSocialsLinks } = userSlice.actions
   
   export default userSlice.reducer

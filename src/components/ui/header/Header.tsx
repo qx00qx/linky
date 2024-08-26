@@ -23,9 +23,11 @@ const Header: React.FC = () => {
         if (location.pathname === '/profile') {
             navigate('/')
         }
-        signOut(auth)
+        
         dispatch(logoutUser())
         localStorage.removeItem('userData')
+
+        signOut(auth)
     }
 
     return (
@@ -38,11 +40,11 @@ const Header: React.FC = () => {
             <div className={styles.left_side}>
                 { isAuth ? (<div>
                     <ButtonGroup spacing={'5px'}>
-                        <Button as={Link} to='/profile' bg={'white'}>
+                        <Button as={Link} to='/account' bg={'white'}>
                             <RiAccountCircleFill size={30} />
                         </Button>
                         <Button as={Link} 
-                                to='/profile/settings'
+                                to='/account/settings'
                                 bg={'white'}
                                 px={'26px'}
                                 py={'16px'}

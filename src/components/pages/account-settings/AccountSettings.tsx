@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import styles from './AccountSettings.module.scss'
-import { Avatar, Button, SkeletonCircle, Stack, Textarea } from '@chakra-ui/react';
+import { Avatar, Button, SkeletonCircle, Stack, Textarea, useDisclosure } from '@chakra-ui/react';
 import { RiAddFill } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 import { useAppDispatch } from '@hooks/redux-hooks/useAppDispatch';
 import { deleteProfilePicture, setProfilePicture } from '@redux/slices/userSlice/userSlice';
 import { deleteFile, upload } from '@utils/firebaseFunction';
-import { useSelector } from 'react-redux';
-import { RootState } from '@redux/store';
+import { useAppSelector } from '@hooks/redux-hooks/useAppDispatch';
 import { removePicturefromLS } from '@utils/LSFunction';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import ChooseLinksModal from '@components/modals/chooseLinksModal/chooseLinksModal';
+import UserSocialLinks from '@components/ui/users-social-links/userSocialLinks';
 
 const AccountSettings: React.FC = () => {
     const auth = getAuth()
 
     const dispatch = useAppDispatch()
-    const { picture } = useSelector((state: RootState) => state.user)
+    const { picture } = useAppSelector((state) => state.user)
 
     let [symbolCount, setSymbolCount] = useState(0);
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [user, loading, error] = useAuthState(auth)
 
@@ -44,12 +46,16 @@ const AccountSettings: React.FC = () => {
         removePicturefromLS()
       }
     }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
     return (
         <div className={styles.settings}>
             <h2>Account Settings</h2>
             <div className={styles.card}>
                 <div className={styles.card_header}>
-                {loading ? <SkeletonCircle size='10'/> : <Avatar size="xl" src={user?.photoURL || undefined} />}
+                {loading ? <SkeletonCircle width={'6rem'} height={'6rem'}/> : <Avatar size="xl" src={user?.photoURL || undefined} />}
                     <Stack className={styles.card_header_buttons} spacing={2} direction='column'>
                         <Button 
                                 bg={'white'}
@@ -87,10 +93,12 @@ const AccountSettings: React.FC = () => {
                         <p>{symbolCount}/120</p>
                     </div>
                     <div className={styles.card_body_bottom}>
-                        <Button bg={'white'}>
+                        <Button bg={'white'} onClick={onOpen}>
                             <RiAddFill/>
                             <p style={{marginLeft: '5px'}}>Add social icons</p>
                         </Button>
+                        <ChooseLinksModal  isOpen={isOpen} onClose={onClose} />
+                        <UserSocialLinks/>
                     </div>
                 </div>
             </div>

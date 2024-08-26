@@ -1,0 +1,13 @@
+.list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+
+    .social:hover {
+        svg path{
+            transition: all 0.3s ease-in-out;
+            fill: #A0AEC0;
+        }
+    }
+    
+}

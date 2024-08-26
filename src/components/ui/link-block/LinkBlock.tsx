@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '';
+import styles from './LinkBlock.module.scss';
 import { Text } from '@chakra-ui/react'
 
 const LinkBlock: React.FC = () => {
     return (
         <div className={styles.block}>
-            <Text>buy me a coffee!</Text>
+            <Text fontSize='md'>buy me a coffee!</Text>
         </div>
     );
 }

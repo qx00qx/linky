@@ -7,7 +7,7 @@ import { updateProfile, User} from "firebase/auth"
 
 export const upload = async (file: File, currentUser: User) => {
 
-        const fileRef = ref(storage, `/profilePicture/${currentUser.displayName}/${file.name}`)
+        const fileRef = ref(storage, `/profilePicture/${currentUser.email}/${file.name}`)
 
         const snapshot = await uploadBytes(fileRef, file)
         const photoURL = await getDownloadURL(snapshot.ref)
@@ -15,10 +15,7 @@ export const upload = async (file: File, currentUser: User) => {
         await updateProfile(currentUser, { photoURL })
 };
 
-export const deleteFile = (file: any, currentUser: any) => {
-  // const fileType = file.type;
-  // const fileExtension = fileType.split('/')[1];
-
-  const fileRef = ref(storage, `/profilePicture/${currentUser.uid}.png`)
+export const deleteFile = (file: any, currentUser: User) => {
+  const fileRef = ref(storage, `/profilePicture/${currentUser.email}/${file.name}`)
   deleteObject(fileRef)
 }

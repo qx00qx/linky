@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase
 import FormRegister from '@components/ui/form/form-register/FormRegister';
 import { setUser } from '@redux/slices/userSlice/userSlice';
 import { useAppDispatch } from '@hooks/redux-hooks/useAppDispatch';
+import { db } from '@firebase-app';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Signup: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -22,7 +24,17 @@ const Signup: React.FC = () => {
                   username,
                   picture: ''
                 }))
-                  navigate('/')
+
+                /* Добавление в базу данных */
+
+                const docRef = doc(db, 'users', user.uid)
+                const payload = { 
+                  email: user.email,
+                  username
+                }
+                setDoc(docRef, payload)
+
+                navigate('/')
                 }
           })
           .catch(() => alert('Invalid user!'))

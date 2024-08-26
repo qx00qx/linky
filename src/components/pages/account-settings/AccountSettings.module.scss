@@ -24,6 +24,11 @@
                 margin-top: 10px;
                 text-align: right;
             }
+            &_bottom {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
     }
 }

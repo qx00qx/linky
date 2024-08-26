@@ -1,12 +1,12 @@
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
 import Login from '@components/pages/login/Login.tsx';
 import Signup from '@components/pages/signup/Signup.tsx';
-import UserProfile from '@components/pages/profile/UserProfile';
 import Home from '@components/pages/home/Home';
 import Layout from '@layouts/Layout';
 import { PrivateRoutes } from '@utils/privateRoutes';
 import AccountSettings from '@components/pages/account-settings/AccountSettings';
+import UserAccount from '@components/pages/account/UserAccount';
 
 const router = createBrowserRouter([
   {
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
         element: <PrivateRoutes />,
         children: [
          {
-            path: "/profile",
-            element: <UserProfile />,
+            path: "/account",
+            element: <UserAccount />,
          },
          {
-          path: "/profile/settings",
+          path: "/account/settings",
           element: <AccountSettings />,
        }
         ]
