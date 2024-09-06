@@ -14,7 +14,7 @@ const useScreenSizes = () => {
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width: 450px)"
+    query: "(max-width: 500px)"
   });
 
   return { isDesktop, isTablet, isMobile, isLaptop };

@@ -54,6 +54,7 @@ const ChooseLinksModal: React.FC<ChooseLinksModalProps> = ({isOpen, onClose}) =>
       const docSnap = await getDoc(docRef);
 
       /* Получаю существующие ссылки из массива и добавляю к ним новые */
+      
       const existingSocialsLinks = docSnap.data()?.socialsLinks || [];   
       const updatedSocialsLinks = [...existingSocialsLinks, { name, url }];
 

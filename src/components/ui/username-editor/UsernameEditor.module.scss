@@ -1,0 +1,21 @@
+.username_editor {
+    display: flex;
+    align-items: center;
+    span {
+        font-weight: 600;
+    }
+    input {
+        font-weight: 600;
+        max-width: 85px;
+    }
+    .button_edit {
+        svg path {
+            transition: all 0.2s ease-in-out;
+        }
+        svg:hover {
+            path {
+                fill: var(--chakra-colors-gray-300)
+            }
+        }
+    }
+}

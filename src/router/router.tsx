@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <PrivateRoutes />,
         children: [
          {
-            path: "/account",
+            path: "/account/:userId",
             element: <UserAccount />,
          },
          {

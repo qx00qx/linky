@@ -1,0 +1,26 @@
+.element {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    &_tablet {
+        flex-wrap: wrap-reverse;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+}
+
+.block {
+    background-color: #E2E8F0;
+    padding: 16px 25px;
+    border-radius: 24px;
+    text-align: center;
+    display: block;
+    max-width: 245px;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: #C5CAE9;
+    }
+}

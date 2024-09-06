@@ -1,13 +1,13 @@
 .header {
     display: flex;
     justify-content: space-between;
-    // background-color: white;
     align-items: center;
     z-index: 2;
     &_mobile {
         justify-content: center;
         gap: 12px;
     }
+    
     .links {
         display: flex;
         gap: 10px;
@@ -15,10 +15,5 @@
 
     .left_side {
         display: flex;
-    }
-
-    .auth {
-        display: flex;
-        gap: 10px;
     }
 }

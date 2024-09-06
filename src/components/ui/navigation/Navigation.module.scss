@@ -1,0 +1,29 @@
+.navigation {
+    &_mobile {
+        position: fixed;
+        top: -100%;
+        width: 100%;
+        right: 0;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        transition: all .3s;
+
+        &_active {
+            top: 0;
+        }
+
+        .button_group {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            gap: 2.5rem;
+            span {
+                padding: 26px 16px;
+            }
+            a, button{
+                font-size: 42px;
+            }
+        }
+    }
+}
