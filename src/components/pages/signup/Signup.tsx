@@ -22,7 +22,6 @@ const Signup: React.FC = () => {
                   email: user.email,
                   id: user.uid,
                   username,
-                  picture: ''
                 }))
 
                 /* Добавление в базу данных */
@@ -37,7 +36,7 @@ const Signup: React.FC = () => {
                 navigate('/')
                 }
           })
-          .catch(() => alert('Invalid user!'))
+          .catch((error) => alert('Invalid user!' + error))
       }
     
     return (

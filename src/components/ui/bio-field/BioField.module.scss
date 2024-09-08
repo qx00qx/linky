@@ -1,0 +1,18 @@
+.counter {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.btn_remove_bio {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    svg path {
+        transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+        svg path {
+            fill: var(--chakra-colors-gray-300);
+        }
+    }
+}

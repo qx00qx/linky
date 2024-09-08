@@ -8,9 +8,10 @@ import CustomLinks from '@components/ui/custom-links/CustomLinks';
 const UserAccount: React.FC = () => {
 
     const user = useAppSelector(state => state.user)
+    
     return (
         <div className={styles.profile}>
-          <Avatar size="xl" src={user.picture || undefined} />
+          <Avatar size="xl" src={user.profilePhoto || undefined} />
           <div className={styles.info}>
               <h2>{user.username}</h2>
               <p>{user.bio}</p>

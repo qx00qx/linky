@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './AccountSettings.module.scss'
-import { Avatar, Box, Button, SkeletonCircle, Stack, Text, Textarea, useDisclosure } from '@chakra-ui/react';
-import { RiAddFill, RiCloseFill } from "react-icons/ri";
+import { Avatar, Button, SkeletonCircle, Stack, Text, useDisclosure } from '@chakra-ui/react';
+import { RiAddFill } from "react-icons/ri";
 import { getAuth } from 'firebase/auth';
 import { useAppDispatch } from '@hooks/redux-hooks/useAppDispatch';
-import { deleteProfilePicture, removeUserBio, setProfilePicture, setUserBio } from '@redux/slices/userSlice/userSlice';
+import { deleteProfilePicture, setProfilePicture } from '@redux/slices/userSlice/userSlice';
 import { deleteFile, upload } from '@utils/firebaseFunction';
 import { useAppSelector } from '@hooks/redux-hooks/useAppDispatch';
 import { removePicturefromLS } from '@utils/LSFunction';
@@ -17,6 +17,7 @@ import { db } from '@firebase-app';
 import { doc, updateDoc } from 'firebase/firestore';
 import clsx from 'clsx';
 import useScreenSizes from '@hooks/useScreenSizes';
+import BioField from '@components/ui/bio-field/BioField';
 
 const ChooseLinksModal = React.lazy(() => import('@components/modals/chooseLinksModal/chooseLinksModal'))
 
@@ -27,27 +28,11 @@ const AccountSettings: React.FC = () => {
     const dispatch = useAppDispatch()
     const userData = useAppSelector(state => state.user)
 
-    let [symbolCount, setSymbolCount] = useState(0);
     const {isOpen, onOpen, onClose} = useDisclosure();
 
-    const [bio, setBio] = useState(() => {
-        const data = localStorage.getItem('userData');
-        return data ? JSON.parse(data).bio : ''
-    })
     const [user, loading, error] = useAuthState(auth)
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
-        const userBio = {
-            bio,
-          };
-          localStorage.setItem('userData', JSON.stringify(userBio));
-      }, [bio]);
-    const onInputTextArea = (event: React.FormEvent<HTMLTextAreaElement>) => {
-        const text = (event.target as HTMLTextAreaElement).value
-        setSymbolCount(text.length)
-        setBio(text)
-    }
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoading(true);
         const file = (event.target as HTMLInputElement).files?.[0];
@@ -61,25 +46,14 @@ const AccountSettings: React.FC = () => {
         }
         setIsLoading(false);
     }
-    const onClickSave = () => {
-        if (user) {
-            const userRef = doc(db, 'users', user?.uid);
-            updateDoc(userRef, { bio })
-            dispatch(setUserBio(bio))
-        }
-        
-    }
+
     const onClickRemovePicture = () => {
-      if (userData.picture && user) {
-        deleteFile(userData.picture)
+      if (userData.profilePhoto && user) {
+        deleteFile(userData.profilePhoto)
 
         dispatch(deleteProfilePicture())
         removePicturefromLS()
       }
-    }
-    const handleRemoveBio = () => {
-        dispatch(removeUserBio())
-        setBio('')
     }
 
     if (error) {
@@ -101,7 +75,7 @@ const AccountSettings: React.FC = () => {
            })}>
                 <div className={styles.card_header}>
                     <div className={styles.card_header_container}>
-                        {isLoading ? <SkeletonCircle width={'6rem'} height={'6rem'}/> : <Avatar size="xl" src={userData.picture} />}
+                        {isLoading ? <SkeletonCircle width={'6rem'} height={'6rem'}/> : <Avatar size="xl" src={userData.profilePhoto} />}
                             <Stack className={styles.card_header_buttons} spacing={2} direction='column'>
                                 <Button 
                                         bg={'white'}
@@ -128,7 +102,7 @@ const AccountSettings: React.FC = () => {
                                         px={'26px'}
                                         py={'16px'}
                                         variant="outline"
-                                        isDisabled={loading || !userData.picture}
+                                        isDisabled={loading || !userData.profilePhoto}
                                         onClick={onClickRemovePicture}
                                         >Remove</Button>
                             </Stack>
@@ -136,16 +110,7 @@ const AccountSettings: React.FC = () => {
                     <UsernameEditor/>
                 </div>
                 <div className={styles.card_body}>
-                    <Textarea className={styles.bio_field} value={bio} maxLength={120} bg={'white'} placeholder='Bio' resize={'none'} onInput={(event) => onInputTextArea(event)} />
-                   {bio &&  <button className={styles.btn_remove_bio} onClick={() => handleRemoveBio()}>
-                                  <RiCloseFill size={'22px'}/>
-                              </button>} 
-                    <Box display={'flex'} justifyContent={'space-between'} marginTop={'10px'} marginBottom={'10px'} alignItems={'center'}>
-                        <Button onClick={() => onClickSave()}>Save Bio</Button>
-                            <div className={styles.counter} >
-                                <p>{symbolCount}/120</p>
-                        </div>
-                    </Box>
+                   <BioField/>
                     <div className={styles.card_body_bottom}>
                         <Button bg={'white'} onClick={onOpen}>
                             <RiAddFill/>

@@ -42,7 +42,6 @@ const ChooseLinksModal: React.FC<ChooseLinksModalProps> = ({isOpen, onClose}) =>
       }));
       dispatch(setSocialsLinks(unsub))
     })}, [dispatch])
-
     const handleClickAddLink = (social: string) => {
       setIsAddingLink(true);
       setSocialName(social)
