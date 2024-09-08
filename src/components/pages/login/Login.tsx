@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import FormLogin from '@components/ui/form/form-login/FormLogin';
 import { setUser } from '@redux/slices/userSlice/userSlice';
 import { useAppDispatch } from '@hooks/redux-hooks/useAppDispatch';
@@ -13,6 +13,23 @@ const Login: React.FC = () => {
 
     const auth = getAuth()
     
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userData = {
+                    id: user.uid,
+                    email: user.email,
+                    username: user.displayName,
+                    picture: user.photoURL as string
+                };
+                dispatch(setUser(userData));
+                localStorage.setItem('userData', JSON.stringify(userData));
+                navigate(`/account/${user.uid}`);
+            }
+        });
+        return () => unsubscribe();
+    }, [auth, dispatch, navigate]);
+    
     const handleLogin = (email: string, password: string) => {
         setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
@@ -21,7 +38,7 @@ const Login: React.FC = () => {
                     id: user?.uid,
                     email: user?.email,
                     username: user?.displayName,
-                    picture: user?.photoURL
+                    picture: user?.photoURL as string
                 };
                 dispatch(setUser(userData))
                 localStorage.setItem('userData', JSON.stringify(userData))

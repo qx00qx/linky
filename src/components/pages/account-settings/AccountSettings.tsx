@@ -9,7 +9,6 @@ import { deleteFile, upload } from '@utils/firebaseFunction';
 import { useAppSelector } from '@hooks/redux-hooks/useAppDispatch';
 import { removePicturefromLS } from '@utils/LSFunction';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import ChooseLinksModal from '@components/modals/chooseLinksModal/chooseLinksModal';
 import UserSocialLinks from '@components/ui/users-social-links/userSocialLinks';
 import LinkCreator from '@components/ui/link-creator/LinkCreator';
 import CustomLinks from '@components/ui/custom-links/CustomLinks';
@@ -18,6 +17,8 @@ import { db } from '@firebase-app';
 import { doc, updateDoc } from 'firebase/firestore';
 import clsx from 'clsx';
 import useScreenSizes from '@hooks/useScreenSizes';
+
+const ChooseLinksModal = React.lazy(() => import('@components/modals/chooseLinksModal/chooseLinksModal'))
 
 const AccountSettings: React.FC = () => {
     const auth = getAuth()

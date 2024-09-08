@@ -1,6 +1,6 @@
-import { Button } from '@chakra-ui/react';
-import styles from './AuthButtons.module.scss'
 import React from 'react';
+import styles from './AuthButtons.module.scss'
+import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const AuthButtons: React.FC = () => {

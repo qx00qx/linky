@@ -6,7 +6,7 @@ export type User = {
     id: string;
     username: string | null;
     bio?: string;
-    picture?: string;
+    picture?: string | undefined;
     socialsLinks?: userSocialLink[],
     customLinks?: customLink[]
 }

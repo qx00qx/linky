@@ -9,7 +9,7 @@ import { store, persistor } from '@redux/store';
 
 const App = () => {
     return <Provider store={store}>
-                <PersistGate loading={<div>Loading..1...</div>} persistor={persistor}>
+                <PersistGate loading={<div>Loading.....</div>} persistor={persistor}>
                         <ChakraProvider theme={theme}>
                                 <RouterProvider router={router} />
                         </ChakraProvider>

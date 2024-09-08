@@ -1,12 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
-
-import Login from '@components/pages/login/Login.tsx';
-import Signup from '@components/pages/signup/Signup.tsx';
+import React, { Suspense } from 'react';
 import Home from '@components/pages/home/Home';
 import Layout from '@layouts/Layout';
-import { PrivateRoutes } from '@utils/privateRoutes';
-import AccountSettings from '@components/pages/account-settings/AccountSettings';
-import UserAccount from '@components/pages/account/UserAccount';
+import PrivateRoutes from '@utils/privateRoutes';
+import { Spinner } from '@chakra-ui/react';
+
+const Loading = <Spinner margin={'3.12rem auto 0'} thickness='4px' speed='0.65s' emptyColor='gray.200' color='gray.800' size='xl'/>
+
+const AccountSettings = React.lazy(() => import('@components/pages/account-settings/AccountSettings'))
+const UserAccount = React.lazy(() => import('@components/pages/account/UserAccount'))
+
+const Signup = React.lazy(() => import('@components/pages/signup/Signup.tsx'))
+const Login = React.lazy(() => import('@components/pages/login/Login.tsx'))
 
 const router = createBrowserRouter([
   {
@@ -22,21 +27,29 @@ const router = createBrowserRouter([
         children: [
          {
             path: "/account/:userId",
-            element: <UserAccount />,
+            element: <Suspense fallback={Loading}>
+                        <UserAccount/>
+                     </Suspense>,
          },
          {
           path: "/account/settings",
-          element: <AccountSettings />,
+          element: <Suspense fallback={Loading}>
+                      <AccountSettings />
+                  </Suspense>,
        }
         ]
       },
       {
         path: "/signup",
-        element: <Signup />
+        element: <Suspense fallback={Loading}>
+                    <Signup/>
+                 </Suspense>
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Suspense fallback={Loading}>
+                    <Login/>
+                </Suspense>
       }
     ],
   },

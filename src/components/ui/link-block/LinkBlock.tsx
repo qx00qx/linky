@@ -17,7 +17,7 @@ const LinkBlock: React.FC<customLink> = ({title, url}) => {
     const { id } = useAppSelector(state => state.user)
     const isSettingsPage = location.pathname === '/account/settings';
 
-    const { isTablet, isMobile, isLaptop } = useScreenSizes();
+    const { isTablet } = useScreenSizes();
     
     const handleRemove = () => {
         dispatch(removeCustomLink(title))
